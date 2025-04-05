@@ -21,7 +21,7 @@ function App() {
     setLoading(true);
     try {
       const response = await fetch(
-        `https://api.spacexdata.com/v3/launches?limit=${limit}&offset=${offset}`
+        `https://api.spacexdata.com/v3/launches?limit=${limit}&offset=${offset}?sort=launch_date_utc&order=desc`
       );
       const data = await response.json();
       if (data.length < limit) setHasMore(false);
@@ -71,7 +71,8 @@ function App() {
         }}
       >
         <ul style={{ listStyle: 'none', padding: 0 }}>
-          {filteredLaunches.map(launch => (
+          {filteredLaunches
+            .map(launch => (
             <ListTile launch={launch} itemHeight={itemHeight} />
           ))}
         </ul>

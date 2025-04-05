@@ -4,13 +4,19 @@ import './listtile.scss';
 function ListTile({launch, itemHeight}) {
   const [view, setView] = useState(false);
   const status = launch.upcoming ? 'upcoming' : launch.launch_success ? 'success' : 'failed';
+  let color = 'green';
+  if (status === 'upcoming') {
+    color = 'blue';
+  }else if (status === 'failed') {
+    color = 'red';
+  }
   return (
     <li key={launch.flight_number} >
       <h2>
-        {launch.mission_name}({launch.launch_year})
+        {launch.mission_name}
         <span class='status'
           style={{
-            backgroundColor: status === 'success' ? 'green' : 'red',
+            backgroundColor: color
           }}
         >
           {status}
